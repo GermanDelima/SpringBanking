@@ -1,4 +1,35 @@
 package com.ar.cac.homebanking.models;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+
+import javax.annotation.processing.Generated;
+
+
+@Entity
+@Table(name = "Usuarios")
+@Getter
+@Setter
+
+
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id_User")
+  private  Long Id;
+
+    @Column(name = "email")
+    private String mail;
+    @Column(name = "clave")
+    private String password;
+    @Column(name = "nombre")
+    private String name;
+    @Column(name = "apellido")
+    private String surname;
+    private String dni;
+
 }
