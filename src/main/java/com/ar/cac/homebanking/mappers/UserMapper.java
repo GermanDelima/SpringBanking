@@ -28,6 +28,7 @@ public class UserMapper {
         dto.setName(user.getName());
         dto.setSurname(user.getSurname());
         dto.setDni(user.getDni());
+        dto.setId(user.getId());
         return dto;
     }
 

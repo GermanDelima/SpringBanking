@@ -1,6 +1,7 @@
 package com.ar.cac.homebanking.controllers;
 
 import com.ar.cac.homebanking.Services.UserService;
+import com.ar.cac.homebanking.exceptions.UserNotExistsException;
 import com.ar.cac.homebanking.models.dtos.UserDTO;
 
 
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -22,20 +25,38 @@ public UserController(UserService service){
     this.service = service ;
 }
 
-
+    //obtenemos una lista de user
     @GetMapping
-    public void getUser(){} //obtenemos todos los user
-    @GetMapping(value = "/{id}")
-    public UserDTO getUserById(@PathVariable Long id){
-    return null;
-    } //obtenemos un user que se ingreso por la variable del path
+    public ResponseEntity<List<UserDTO>> getUsers(){
+    List<UserDTO> lista = service.getUsers();
+    return ResponseEntity.status(HttpStatus.OK).body(lista);
+    }
 
+    //obtenemos un user que se ingreso por la variable del path
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
+    return ResponseEntity.status(HttpStatus.OK).body(service.getUsersById(id));
+    }
+
+    //creamos un Users
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user){
     return ResponseEntity.status(HttpStatus.CREATED).body(service.createUser(user));
     }
+    //modificacion totalmente
+    @PutMapping(value = "/{id}")
+    public void updateAllUser(@PathVariable Long id){}
+    //modificamos parcialmente
+    @PatchMapping(value = "/{id}")
+    public void updateUser(){}
 
-    public void updateAllUser(){} //modificamos completamente
-    public void updateUser(){} //modificamos parcialmente
-    public void deleteUser(){} //eliminamos
+    //eliminamos un user
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+    return ResponseEntity.status(HttpStatus.OK).body(service.deleteUser(id));
+    }
+
+
+
+
 }

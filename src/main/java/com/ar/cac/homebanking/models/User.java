@@ -22,14 +22,18 @@ public class User {
     @Column(name = "Id_User")
   private  Long Id;
 
-    @Column(name = "email")
+
     private String mail;
-    @Column(name = "clave")
+
+    @Column(name = "contrasenia")
     private String password;
+
     @Column(name = "nombre")
     private String name;
+
     @Column(name = "apellido")
     private String surname;
+
     private String dni;
 
 }
