@@ -43,18 +43,23 @@ public UserController(UserService service){
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user){
     return ResponseEntity.status(HttpStatus.CREATED).body(service.createUser(user));
     }
-    //modificacion totalmente
+    //modification total a todos los user y a uno solo
+    //necesitamos pasar él id del usuario
+    //necesitamos pasar el campo a ser modificado
+
     @PutMapping(value = "/{id}")
-    public void updateAllUser(@PathVariable Long id){}
-    //modificamos parcialmente
-    @PatchMapping(value = "/{id}")
-    public void updateUser(){}
+    public ResponseEntity<UserDTO> editUser(@PathVariable Long id,  @RequestBody UserDTO dto){
+    return ResponseEntity.status(HttpStatus.OK).body(service.editUser(id, dto));
+    }
+
 
     //eliminamos un user
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id){
     return ResponseEntity.status(HttpStatus.OK).body(service.deleteUser(id));
     }
+
+
 
 
 

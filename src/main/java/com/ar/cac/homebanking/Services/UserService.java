@@ -51,6 +51,28 @@ public class UserService {
             throw new UserNotExistsException("El usuario a eliminar elegido no existe");
         }
     }
+    //metodo para editar completamente
+    public UserDTO editUser(Long id, UserDTO dto) {
+        if (repository.existsById(id)){
+           User userToModify =  repository.findById(id).get();
+           if (dto.getDni() != null){
+               userToModify.setDni(dto.getDni());
+           }
+           if (dto.getName() != null){
+               userToModify.setName(dto.getName());
+           }
+           if (dto.getPassword() != null){
+               userToModify.setPassword(dto.getPassword());
+           }
+           if (dto.getMail() != null){
+               userToModify.setMail(dto.getMail());
+           }
+           repository.save(userToModify);
+           return UserMapper.userToDto(userToModify);
+
+        }
+        return null;
+    }
 }
 
 
