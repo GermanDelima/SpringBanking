@@ -7,6 +7,7 @@ import com.ar.cac.homebanking.mappers.UserMapper;
 import com.ar.cac.homebanking.models.User;
 import com.ar.cac.homebanking.models.dtos.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,10 +30,17 @@ public class UserService {
 
     //método para pasar un userDto a una entity y devolverla
     public UserDTO createUser(UserDTO userDto) {
-        //Mapeamos un UserDTO ha Entity
-        User user = repository.save(UserMapper.dtoToUser(userDto));
-        //Mapeamos la Entity  a un UserDTO
-        return UserMapper.userToDto(user);
+
+        User userValidated = validateUserByMail(userDto); //valida user por mail
+        if (userValidated == null){
+            //Si el mail del user es == null quiere decir que no existe, X ende lo guardamos en la data base usando el Mappers
+            User userSave = repository.save(UserMapper.dtoToUser(userDto));
+            //Mapeamos la Entity a un UserDTO y lo retornamos al controller
+            return UserMapper.userToDto(userSave);
+        } else {
+           throw  new UserNotExistsException("Usuario con mail" + userDto.getMail() + " Existe" );
+        }
+
     }
 
     //método para traer un user por id
@@ -72,6 +80,11 @@ public class UserService {
 
         }
         return null;
+    }
+
+    //validamo si existe un user por su email en base de datos True o False
+    public User validateUserByMail(UserDTO dto){
+        return  repository.findByMail(dto.getMail());
     }
 }
 
