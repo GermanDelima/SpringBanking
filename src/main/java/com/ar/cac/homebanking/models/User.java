@@ -11,7 +11,7 @@ import javax.annotation.processing.Generated;
 
 
 @Entity
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
 @Getter
 @Setter
 
@@ -19,7 +19,7 @@ import javax.annotation.processing.Generated;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_User")
+    @Column(name = "id_user")
   private  Long Id;
 
 
