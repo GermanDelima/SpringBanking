@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/accounts")
 public class AccountController {
-    @Autowired
     final private AccountService service;
     public AccountController(AccountService service){
         this.service = service;
@@ -34,5 +33,18 @@ public ResponseEntity<List<AccountDTO>> getAccounts(){
     public ResponseEntity<AccountDTO> createAccount(@RequestBody AccountDTO dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createAccount(dto));
     }
+
+//editamos una cuenta
+    @PutMapping("/{id}")
+    public ResponseEntity<AccountDTO> updateAccount(@PathVariable Long id, @RequestBody AccountDTO dto) {
+       return ResponseEntity.status(HttpStatus.OK).body(service.updateAccount(id, dto));
+    }
+
+//eliminamos una cuenta
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAccount(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.deleteAccount(id));
+}
+
 
 }

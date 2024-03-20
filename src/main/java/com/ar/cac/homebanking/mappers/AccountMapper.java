@@ -15,10 +15,11 @@ public class AccountMapper {
         account.setCbu(dto.getCbu());
         account.setAlias(dto.getAlias());
         account.setAmount(dto.getAmount());
+        account.setOwner(account.getOwner());
         return account;
     }
 
-    //Metodo para pasar de Entity a AccountDTO y mostrar via Json al Front
+    //Metodo para pasar de Entity a AccountDTO y mostrale al usuario
 
     public AccountDTO accountToDto(Account account){
     AccountDTO dto = new AccountDTO();
@@ -27,6 +28,7 @@ public class AccountMapper {
     dto.setCbu(account.getCbu());
     dto.setAlias(account.getAlias());
     dto.setAmount(account.getAmount());
+    dto.setOwner(account.getOwner());
     return dto;
     }
 }

@@ -1,16 +1,18 @@
 package com.ar.cac.homebanking.models;
-
-
 import com.ar.cac.homebanking.models.enums.AccountType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "cuenta")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,7 @@ public class Account {
     private String cbu;
     private String alias;
     private BigDecimal amount;
-
-    //private id_owner;
+    @ManyToOne
+    private User Owner;
 
 }

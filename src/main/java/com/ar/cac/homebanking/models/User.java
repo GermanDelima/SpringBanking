@@ -5,13 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.web.WebProperties;
-
-import javax.annotation.processing.Generated;
+import java.util.List;
 
 
 @Entity
 @Table(name = "usuarios")
+@NoArgsConstructor @AllArgsConstructor
 @Getter
 @Setter
 
@@ -35,5 +34,8 @@ public class User {
     private String surname;
 
     private String dni;
+
+    @OneToMany(mappedBy = "Owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Account> accounts;
 
 }

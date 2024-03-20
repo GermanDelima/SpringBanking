@@ -1,6 +1,8 @@
 package com.ar.cac.homebanking.Services;
 
 import com.ar.cac.homebanking.Repositories.AccountRepository;
+import com.ar.cac.homebanking.exceptions.AccountNotExistsException;
+import com.ar.cac.homebanking.exceptions.UserNotExistsException;
 import com.ar.cac.homebanking.mappers.AccountMapper;
 import com.ar.cac.homebanking.models.Account;
 import com.ar.cac.homebanking.models.dtos.AccountDTO;
@@ -33,9 +35,36 @@ public class AccountService {
     }
 
     public AccountDTO createAccount(AccountDTO dto) {
-       dto.setType(AccountType.CAJA_AHORRO); //se setea antes de guardar en la base de datos
+       //dto.setType(AccountType.CAJA_AHORRO); //se setea antes de guardar en la base de datos
        dto.setAmount(BigDecimal.ZERO);
        Account account = repository.save(AccountMapper.dtoToAccount(dto));
        return AccountMapper.accountToDto(account);
+    }
+
+    public String deleteAccount(Long id) {
+        if (repository.existsById(id)){
+            repository.deleteById(id);
+            return "La cuenta con el id: " +id + "se elimino";
+        } else {
+            throw new AccountNotExistsException("La cuenta a eliminar no existe");
+        }
+    }
+
+    public AccountDTO updateAccount(Long id, AccountDTO dto) {
+       if (repository.existsById(id)){
+           Account accountToModify = repository.findById(id).get();
+           if (dto.getAlias() != null){
+               accountToModify.setAlias(dto.getAlias());
+           }
+           if (dto.getCbu() != null){
+               accountToModify.setCbu(dto.getCbu());
+           }
+           if (dto.getAmount() != null){
+               accountToModify.setAmount(dto.getAmount());
+           }
+           Account modificado = repository.save(accountToModify);
+           AccountMapper.accountToDto(modificado);
+        }
+        return null;
     }
 }
