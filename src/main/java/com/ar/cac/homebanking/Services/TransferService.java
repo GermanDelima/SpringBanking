@@ -35,7 +35,7 @@ public class TransferService {
     public TransferDTO getTransferById(Long id) {
         if (repository.existsById(id)) {
             Transfer transfer = repository.findById(id).get();
-            TransferMapper.TransferToDto(transfer);
+            return TransferMapper.TransferToDto(transfer);
         }
         throw new TransferNotFoundException("Transfer not found with id: " + id);
     }
