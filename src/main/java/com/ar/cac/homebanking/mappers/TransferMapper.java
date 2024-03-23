@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @Builder
 public class TransferMapper {
 
-    //Metodo para pasar de TransferDTO a Entity y guardar en el Repository base de datos
 public Transfer dtoToTransfer(TransferDTO dto){
     return Transfer.builder()
             .origin(dto.getOrigin())
@@ -22,7 +21,6 @@ public Transfer dtoToTransfer(TransferDTO dto){
             .build();
 }
 
-    //Metodo para pasar de Entity a DTO y mostralo al usuario
 public TransferDTO TransferToDto(Transfer transfer){
     return TransferDTO.builder()
             .id(transfer.getId())

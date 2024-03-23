@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "cuenta")
@@ -17,12 +18,15 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "account_type")
     private AccountType type;
     private String cbu;
     private String alias;
     private BigDecimal amount;
     @ManyToOne
-    private User Owner;
+    private User owner;
+
+
 
 }

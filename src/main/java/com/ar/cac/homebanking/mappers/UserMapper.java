@@ -8,7 +8,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class UserMapper {
-    //Metodos para pasar de UserDTO a Entity y guardar en el Repository base de datos
     public static User dtoToUser(UserDTO dto) {
         User user = new User();
         user.setMail(dto.getMail());
@@ -20,7 +19,6 @@ public class UserMapper {
         return user;
     }
 
-    //Metodo para pasar de Entity a DTO y mostrale al usuario
     public static UserDTO userToDto(User user){
         UserDTO dto = new UserDTO();
         dto.setMail(user.getMail());
@@ -31,8 +29,4 @@ public class UserMapper {
         dto.setId(user.getId());
         return dto;
     }
-
-
-
-
 }

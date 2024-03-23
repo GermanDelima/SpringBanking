@@ -10,7 +10,7 @@ import java.util.Date;
 @Builder
 public class TransferDTO {
     private Long id;
-    private long origin;
+    private Long origin;
     private Long target; //destino
     private Date date; //fecha
     private BigDecimal amount; //monto
