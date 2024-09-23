@@ -1,38 +1,10 @@
-Descripción del Proyecto:
 
-El proyecto consiste en el desarrollo de un simulador de acciones que replicará un sistema de Homebanking denominado "Spring Banking". Se trabajarán sobre tres entidades principales: Usuarios, Cuentas (ya sea cuenta corriente o caja de ahorro) y Transferencias.
+Para llevar a cabo el proyecto, desarrollé un simulador de acciones denominado "Spring Banking", replicando un sistema de homebanking. El proyecto se centró en tres entidades clave: Usuarios, Cuentas (corriente o caja de ahorro), y Transferencias.
 
-Requisitos Técnicos:
+Primero, utilicé Java 11 junto con Maven para gestionar las dependencias del proyecto. Me aseguré de establecer la conexión a la base de datos a través de JDBC, y configuré correctamente el archivo application.properties, donde incluí las propiedades necesarias para que Spring JPA e Hibernate gestionaran la persistencia. Entre las configuraciones, habilité la opción ddl.auto=update para que las entidades se generaran y actualizaran de forma automática en la base de datos.
 
-Utilizar Java 11 o 17 con Maven.
-Conexión a la Base de Datos mediante JDBC.
-Implementar Spring JPA y Hibernate para el manejo de la persistencia.
-Configurar en el application.properties la conexión y las configuraciones (incluyendo ddl.auto=update).
+La arquitectura del sistema fue diseñada como un monolito con varias capas, donde implementé Controllers, Services, Mappers, DTOs, Entities y Repositories, para separar correctamente las responsabilidades y asegurar un código limpio y mantenible.
 
-Arquitectura del Proyecto:
+Trabajé en las tres entidades principales. Para Usuario, definí atributos como el id, nombreUsuario, email, contraseña, dni, fecha_nacimiento, domicilio, y una lista de cuentas asociadas. La entidad Cuenta incluyó el id, nombre, cbu, alias, monto y la relación con su dueño (un objeto de tipo Usuario). Finalmente, para Transferencias, trabajé con los atributos id, monto, cuentaOrigen, cuentaDestino y fecha.
 
-Se trabajará sobre un Sistema Monolítico con las siguientes capas:
-
-
-Controllers
-Services
-Mappers
-DTO (Data Transfer Objects)
-Entities
-Repositories
-
-Entidades y Relaciones:
-
-
-Usuario:
-Atributos: id, nombreUsuario, email, contraseña, dni, fecha_nacimiento, domicilio (dirección), lista de cuentas (List<Cuenta>).
-Cuenta:
-Atributos: id, nombre, cbu, alias, monto, dueño (usuario dueño de la cuenta).
-Transferencias:
-id, monto, cuentaOrigen, cuentaDestino, fecha
-
-Tareas a Realizar:
-
-
-Desarrollar un CRUD para cada entidad (Usuarios, Cuentas, y Transferencias).
-Establecer las relaciones entre entidades, garantizando la integridad de los datos.
+Desarrollé un CRUD completo para cada una de estas entidades, permitiendo crear, leer, actualizar y eliminar usuarios, cuentas y transferencias. Además, establecí las relaciones necesarias entre las entidades, implementando correctamente las asociaciones entre ellas para garantizar la integridad de los datos en todo momento.
